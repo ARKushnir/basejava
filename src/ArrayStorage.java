@@ -2,29 +2,77 @@
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    //ArrayList<Resume> myResumeArrayList = new ArrayList<Resume>();
+    private Resume[] storage = new Resume[5];
 
-    void clear() {
+    private int maxIndex = 0; // индекс, следующий за последним заполненным значением
+
+    public void clear() {
+        for (int i = 0; i < maxIndex; i++) {
+            storage[i] = null;
+        }
+        maxIndex = 0;
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
+        if (maxIndex < storage.length) {
+            storage[maxIndex++] = r;
+            System.out.println("Resume добавлено в ячейку " + maxIndex);
+            //i++;
+        }
+
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
+        for (int i = 0; i < maxIndex; i++) {
+            Resume r = storage[i];
+            if (uuid.equals(r.getUuid())) {
+                return r;
+            }
+        }
         return null;
     }
 
-    void delete(String uuid) {
+
+    public void delete(String uuid) {
+        int inxDel = -1; // индекс элемента которого мы хотим удалить
+        for (int i = 0; i < maxIndex; i++) {
+            Resume r = storage[i];
+            if (uuid.equals(r.getUuid())) {
+                inxDel = i;
+                break;
+            }
+        }
+        if (inxDel == -1) {
+            return;
+        }
+
+        for (int i = inxDel; i < maxIndex - 1; i++) {
+            storage[i] = storage[i + 1];
+        }
+        maxIndex--;
+        storage[maxIndex] = null;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return new Resume[0];
+        //return Arrays.copyOfRange(storage, 0, maxIndex);
+        Resume[] dest = new Resume[maxIndex];
+        for (int i = 0; i < maxIndex; i++) {
+            dest[i] = storage[i];
+
+        }
+        return dest;
     }
 
+
     int size() {
-        return 0;
+
+        return maxIndex;
     }
+
+    //return 0;
+
 }
