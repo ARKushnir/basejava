@@ -32,6 +32,7 @@ public class ArrayStorage {
         int index = getIndexById(uuid);
         if (index == -1) {
             System.out.println("Ничего не нашли для get");
+            //
             return null;
         }
         return storage[index];
