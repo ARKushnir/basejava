@@ -72,7 +72,7 @@ public class ArrayStorage {
             dest[i] = storage[i];
         }
         return dest;
-        //Arrays.stream(storage).filter(Objects::nonNull).toArray(Integer[]::new);
+        Integer[] StorageNonNull = Arrays.stream(storage).filter(Objects::nonNull).toArray(Integer[]::new);
     }
 
     int size() {
