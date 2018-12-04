@@ -1,15 +1,12 @@
 import java.util.Arrays;
 
 public class ArrayStorage {
-    private Resume[] storage = new Resume[5];
+    private Resume[] storage = new Resume[10_000];
 
-    private int maxIndex = 0; // индекс, следующий за последним заполненным значением
+    private int maxIndex = 0;
 
     public void clear() {
-        for (int i = 0; i < maxIndex; i++) {
             Arrays.fill(storage, null);
-            //storage[i] = null;
-        }
         maxIndex = 0;
     }
 
@@ -17,10 +14,8 @@ public class ArrayStorage {
         int index = getIndexById(r.getUuid());
         if (index >= 0) {
             System.out.println("Нашли дублирующий элемент");
-            return;
-        }
 
-        if (maxIndex < storage.length) {
+        } else if (maxIndex < storage.length) {
             storage[maxIndex++] = r; //добавляем новый элемент
             System.out.println("Resume добавлено в ячейку " + maxIndex);
         } else {
@@ -32,7 +27,6 @@ public class ArrayStorage {
         int index = getIndexById(uuid);
         if (index == -1) {
             System.out.println("Ничего не нашли для get");
-            //
             return null;
         }
         return storage[index];
@@ -40,7 +34,6 @@ public class ArrayStorage {
 
 
     public void delete(String uuid) {
-        // индекс элемента которого мы хотим удалить
         int indexDel = getIndexById(uuid);
         if (indexDel == -1) {
             System.out.println("Ничего не нашли для delete");
@@ -48,10 +41,10 @@ public class ArrayStorage {
         }
 
         for (int i = indexDel; i < maxIndex - 1; i++) {
-            storage[i] = storage[i + 1];
+            storage[i] = storage[maxIndex - 1];
+            storage[maxIndex] = null;
+            maxIndex--;
         }
-        maxIndex--;
-        storage[maxIndex] = null;
     }
 
     public void update(Resume r) {
@@ -68,12 +61,7 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] dest = new Resume[maxIndex];
-        for (int i = 0; i < maxIndex; i++) {
-            dest[i] = storage[i];
-        }
-        return dest;
-        Integer[] StorageNonNull = Arrays.stream(storage).filter(Objects::nonNull).toArray(Integer[]::new);
+        return Arrays.copyOf(storage, maxIndex);
     }
 
     int size() {
@@ -86,8 +74,7 @@ public class ArrayStorage {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
-
         }
-        return -1; //Не нашли uuid в хранилище
+        return -1;
     }
 }

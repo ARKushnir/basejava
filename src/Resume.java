@@ -5,7 +5,7 @@ public class Resume {
 
     private String name;
     // Unique identifier
-    public String uuid;
+    private String uuid;
 
     public void setName(String name) {
         this.name = name;
@@ -24,7 +24,7 @@ public class Resume {
     @Override
     public String toString() {
 
-        return uuid;
+        return uuid + " " + name;
     }
 
 }
