@@ -16,7 +16,7 @@ public class ArrayStorage {
             System.out.println("Нашли дублирующий элемент");
 
         } else if (maxIndex < storage.length) {
-            storage[maxIndex++] = r; //добавляем новый элемент
+            storage[maxIndex++] = r;
         } else {
             System.out.println("Вышли за пределы массива");
         }
