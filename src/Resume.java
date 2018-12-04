@@ -19,8 +19,6 @@ public class Resume {
         return uuid;
     }
 
-
-
     @Override
     public String toString() {
 

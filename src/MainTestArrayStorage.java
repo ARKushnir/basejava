@@ -7,16 +7,12 @@ public class MainTestArrayStorage {
     public static void main(String[] args) {
         Resume r1 = new Resume();
         r1.setUuid("uuid1");
-        r1.setName("a1");
         Resume r2 = new Resume();
         r2.setUuid("uuid2");
-        r2.setName("b1");
         Resume r3 = new Resume();
         r3.setUuid("uuid3");
-        r3.setName("c1");
         Resume r4 = new Resume();
         r4.setUuid("uuid1");
-        r4.setName("aa1");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);

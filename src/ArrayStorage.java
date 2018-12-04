@@ -6,7 +6,7 @@ public class ArrayStorage {
     private int maxIndex = 0;
 
     public void clear() {
-            Arrays.fill(storage, null);
+        Arrays.fill(storage, null);
         maxIndex = 0;
     }
 
@@ -17,7 +17,6 @@ public class ArrayStorage {
 
         } else if (maxIndex < storage.length) {
             storage[maxIndex++] = r; //добавляем новый элемент
-            System.out.println("Resume добавлено в ячейку " + maxIndex);
         } else {
             System.out.println("Вышли за пределы массива");
         }
@@ -37,12 +36,9 @@ public class ArrayStorage {
         int indexDel = getIndexById(uuid);
         if (indexDel == -1) {
             System.out.println("Ничего не нашли для delete");
-            return;
-        }
-
-        for (int i = indexDel; i < maxIndex - 1; i++) {
-            storage[i] = storage[maxIndex - 1];
-            storage[maxIndex] = null;
+        } else {
+            storage[indexDel] = storage[maxIndex - 1];
+            storage[maxIndex - 1] = null;
             maxIndex--;
         }
     }
