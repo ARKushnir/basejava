@@ -57,3 +57,4 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         return Arrays.binarySearch(storage, 0, maxIndex, searchKey);
     }
 }
+//
