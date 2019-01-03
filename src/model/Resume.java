@@ -36,6 +36,10 @@ public class Resume implements Comparable {
         return uuid;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
 

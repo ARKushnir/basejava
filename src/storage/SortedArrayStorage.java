@@ -8,6 +8,11 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void update(Resume r) {
+        int index = getIndexById(r.getUuid());
+        if (index < 0) {
+            return;
+        }
+        storage[index] = r;
 
     }
 
@@ -42,7 +47,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public Resume[] getAll() {
-        return new Resume[0];
+        return Arrays.copyOfRange(storage, 0, maxIndex);
     }
 
     @Override

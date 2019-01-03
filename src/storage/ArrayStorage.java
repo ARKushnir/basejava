@@ -31,6 +31,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         }
     }
 
+    @Override
     public void update(Resume r) {
 
         int i = getIndexById(r.getUuid());
