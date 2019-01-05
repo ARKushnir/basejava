@@ -40,7 +40,6 @@ public class MainArray {
                 case "save":
                     r = new Resume();
                     r.setUuid(uuid);
-                    r.setName(name);
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
@@ -60,7 +59,6 @@ public class MainArray {
                 case "update":
                     r = new Resume();
                     r.setUuid(uuid);
-                    r.setName(name);
                     ARRAY_STORAGE.update(r);
                     printAll();
                     break;

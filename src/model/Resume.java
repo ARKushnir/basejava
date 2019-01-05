@@ -5,12 +5,8 @@ package model;
  */
 public class Resume implements Comparable<Resume> {
 
-    private String name;
     private String uuid;
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
@@ -20,9 +16,6 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
-    public String getName() {
-        return name;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -39,10 +32,6 @@ public class Resume implements Comparable<Resume> {
         return uuid.hashCode();
     }
 
-    @Override
-    public String toString() {
-        return uuid + " " + name;
-    }
 
     @Override
     public int compareTo(Resume o) {
