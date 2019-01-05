@@ -24,7 +24,6 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
@@ -65,7 +64,6 @@ public abstract class AbstractArrayStorage implements Storage {
             size--;
         }
     }
-
 
     protected abstract void saveByIndex(Resume r, int index);
 
