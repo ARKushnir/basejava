@@ -6,26 +6,18 @@ import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
 
-
     @Override
     protected void saveByIndex(Resume r, int index) {
 
-        index = -index - 1;
-        System.arraycopy(storage, index, storage, index + 1, size - index);
-        storage[index] = r;
+        int insrtIdx = -index - 1;
+        System.arraycopy(storage, insrtIdx, storage, insrtIdx + 1, size - insrtIdx);
+        storage[insrtIdx] = r;
         size++;
-
     }
 
     @Override
     public void deleteByIndex(int index) {
         System.arraycopy(storage, index + 1, storage, index, size - index - 1);
-        size--;
-    }
-
-    @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
     }
 
     @Override

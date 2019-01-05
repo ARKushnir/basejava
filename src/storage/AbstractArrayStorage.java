@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10_000;
-    public Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
 
     protected int size = 0;
 
@@ -16,13 +16,18 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         int index = getIndexById(uuid);
-        if (index == -1) {
+        if (index < 0) {
             System.out.println("Ничего не нашли для get");
             return null;
+        } else {
+            return storage[index];
         }
-        return storage[index];
     }
 
+
+    public Resume[] getAll() {
+        return Arrays.copyOfRange(storage, 0, size);
+    }
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -33,31 +38,34 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndexById(r.getUuid());
         if (index < 0) {
             System.out.println("Ничего не нашли для update");
+        } else {
+            storage[index] = r;
         }
-        storage[index] = r;
     }
 
     public void save(Resume r) {
+        int index = getIndexById(r.getUuid());
         if (size == STORAGE_LIMIT) {
             System.out.println("Хранилище заполнено");
-            return;
-        }
-        int index = getIndexById(r.getUuid());
-        if (index >= 0) {
+        } else if (index >= 0) {
             System.out.println("Нашли дублирующий элемент");
-            return;
+        } else {
+            saveByIndex(r, index);
+            size++;
         }
-        saveByIndex(r, index);
     }
 
     public void delete(String uuid) {
         int index = getIndexById(uuid);
         if (index < 0) {
             System.out.println("Ничего не нашли для delete");
-            return;
+        } else {
+            deleteByIndex(index);
+            storage[size - 1] = null;
+            size--;
         }
-        deleteByIndex(index);
     }
+
 
     protected abstract void saveByIndex(Resume r, int index);
 
