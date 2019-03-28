@@ -12,7 +12,6 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         int insrtIdx = -index - 1;
         System.arraycopy(storage, insrtIdx, storage, insrtIdx + 1, size - insrtIdx);
         storage[insrtIdx] = r;
-        size++;
     }
 
     @Override
@@ -22,8 +21,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndexById(String uuid) {
-        Resume searchKey = new Resume();
-        searchKey.setUuid(uuid);
+        Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 }

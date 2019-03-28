@@ -1,5 +1,8 @@
 package storage;
 
+import exception.ExistStorageException;
+import exception.NotExistStorageException;
+import exception.StorageException;
 import model.Resume;
 
 import java.util.Arrays;
@@ -17,8 +20,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public Resume get(String uuid) {
         int index = getIndexById(uuid);
         if (index < 0) {
-            System.out.println("Ничего не нашли для get");
-            return null;
+            throw new NotExistStorageException(uuid);
         } else {
             return storage[index];
         }
@@ -36,7 +38,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume r) {
         int index = getIndexById(r.getUuid());
         if (index < 0) {
-            System.out.println("Ничего не нашли для update");
+            throw new NotExistStorageException(r.getUuid());
         } else {
             storage[index] = r;
         }
@@ -45,9 +47,9 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume r) {
         int index = getIndexById(r.getUuid());
         if (size == STORAGE_LIMIT) {
-            System.out.println("Хранилище заполнено");
+            throw new StorageException("Storage overflow", r.getUuid());
         } else if (index >= 0) {
-            System.out.println("Нашли дублирующий элемент");
+            throw new ExistStorageException(r.getUuid());
         } else {
             saveByIndex(r, index);
             size++;
@@ -57,7 +59,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uuid) {
         int index = getIndexById(uuid);
         if (index < 0) {
-            System.out.println("Ничего не нашли для delete");
+            throw new NotExistStorageException(uuid);
         } else {
             deleteByIndex(index);
             storage[size - 1] = null;
