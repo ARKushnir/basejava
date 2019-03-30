@@ -1,4 +1,4 @@
-package storage;
+package storage_tests;
 
 import exception.ExistStorageException;
 import exception.NotExistStorageException;
@@ -7,6 +7,7 @@ import model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import storage.Storage;
 
 import static storage.AbstractArrayStorage.STORAGE_LIMIT;
 
