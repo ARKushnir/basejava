@@ -9,7 +9,7 @@ public class MainReflection {
             InvocationTargetException {
         Resume r = new Resume();
         Field field = r.getClass().getDeclaredFields()[0];
-        Method m = r.getClass().getMethod("toString", null);
+        Method m = r.getClass().getMethod("toString");
         field.setAccessible(true);
         System.out.println(field.getName());
         System.out.println(field.get(r));
