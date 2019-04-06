@@ -125,7 +125,6 @@ public abstract class AbstractArrayStorageTest {
 
     private void assertSize(int size) {
         Assert.assertEquals(size, storage.size());
-        //
     }
 
 }
